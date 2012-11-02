@@ -311,6 +311,10 @@
     return [self dateForColumnIndex:[self columnIndexForName:columnName]];
 }
 
+- (NSDate*)dateForColumnUsingMilliseconds:(NSString*)columnName {
+    return [self dateForColumnIndexUsingMilliseconds:[self columnIndexForName:columnName]];
+}
+
 - (NSDate*)dateForColumnIndex:(int)columnIdx {
     
     if (sqlite3_column_type([_statement statement], columnIdx) == SQLITE_NULL || (columnIdx < 0)) {
@@ -318,6 +322,16 @@
     }
     
     return [NSDate dateWithTimeIntervalSince1970:[self doubleForColumnIndex:columnIdx]];
+}
+
+// NB: Added by Ryan Pfeffer on 11-02-2012 to read dates from the db as milliseconds
+- (NSDate*)dateForColumnIndexUsingMilliseconds:(int)columnIdx {
+    
+    if (sqlite3_column_type([_statement statement], columnIdx) == SQLITE_NULL || (columnIdx < 0)) {
+        return nil;
+    }
+    
+    return [NSDate dateWithTimeIntervalSince1970:[self doubleForColumnIndex:columnIdx]/1000];
 }
 
 

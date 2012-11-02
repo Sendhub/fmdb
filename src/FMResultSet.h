@@ -65,7 +65,9 @@
 - (NSString*)stringForColumnIndex:(int)columnIdx;
 
 - (NSDate*)dateForColumn:(NSString*)columnName;
+- (NSDate*)dateForColumnUsingMilliseconds:(NSString*)columnName;
 - (NSDate*)dateForColumnIndex:(int)columnIdx;
+- (NSDate*)dateForColumnIndexUsingMilliseconds:(int)columnIdx;
 
 - (NSData*)dataForColumn:(NSString*)columnName;
 - (NSData*)dataForColumnIndex:(int)columnIdx;
